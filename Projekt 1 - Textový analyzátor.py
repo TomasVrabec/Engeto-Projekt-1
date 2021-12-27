@@ -93,3 +93,6 @@ print(f"There are {velkymi_pismeny} uppercase words.")
 print(f"There are {malymi_pismeny} lowercase words.")
 print(f"There are {pocet_cisel} numeric strings.")
 print(f"The sum of all the numbers is {soucet_cisel}.")
+
+# TO DO:
+# sloupcový graf

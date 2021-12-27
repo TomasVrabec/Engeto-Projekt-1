@@ -35,19 +35,19 @@ registrovani = {
     "liz": "pass123",
 			}
 
-# # PRIHLASOVANI:
-# username = input("username: ")
-# password = input("password: ")
-# print(oddelovac)
-#
-# if registrovani.get(username) == password:
-# 	print(f"""Welcome to the app, {username}
-# We have 3 texts to be analyzed.
-# {oddelovac}""")
-#
-# else:
-#     print("Unregistered user, terminating the program...")
-#     quit()
+# PRIHLASOVANI:
+username = input("username: ")
+password = input("password: ")
+print(oddelovac)
+
+if registrovani.get(username) == password:
+	print(f"""Welcome to the app, {username}
+We have 3 texts to be analyzed.
+{oddelovac}""")
+
+else:
+    print("Unregistered user, terminating the program...")
+    quit()
 
 # VYBER TEXTU
 vyber = input("Enter a number btw. 1 and 3 to select: ")

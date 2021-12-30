@@ -26,7 +26,7 @@ in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.'''
 ]
 
-oddelovac = "-"*35
+oddelovac = "-"*40
 
 registrovani = {
 	"bob": "123",
@@ -102,7 +102,7 @@ print(f"""There are {pocet_slov} words in the selected text.
 There are {zacinajici_velkym} titlecase words.
 There are {velkymi_pismeny} uppercase words.
 There are {malymi_pismeny} lowercase words.
-There are {pocet_cisel} numeric strings."
+There are {pocet_cisel} numeric strings.
 The sum of all the numbers is {soucet_cisel}.
 {oddelovac}
 LEN|   OCCURENCES    |NR.
@@ -112,7 +112,7 @@ vysledky = list()
 for vyskyt in vyskyt_delky:
 	vysledky.append((vyskyt_delky[vyskyt], vyskyt))
 
-setridene_vysledky = sorted(vysledky, key=lambda x: x[1])
+setridene_vysledky = sorted(vysledky, key=lambda x: x[1]) #setrideni podle delky
 
 for tupl in setridene_vysledky:
 	graf = tupl[0]*"*"

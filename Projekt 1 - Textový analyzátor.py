@@ -30,9 +30,9 @@ oddelovac = "-"*35
 
 registrovani = {
 	"bob": "123",
-    "ann": "pass123",
-    "mike": "password123",
-    "liz": "pass123",
+	"ann": "pass123",
+	"mike": "password123",
+	"liz": "pass123",
 			}
 
 # PRIHLASOVANI:
@@ -46,53 +46,74 @@ We have 3 texts to be analyzed.
 {oddelovac}""")
 
 else:
-    print("Unregistered user, terminating the program...")
-    quit()
+	print("Unregistered user, terminating the program...")
+	quit()
 
 # VYBER TEXTU
 vyber = input("Enter a number btw. 1 and 3 to select: ")
 print(oddelovac)
 
 if vyber.isnumeric() and 0 < int(vyber) < 4:
-    text = TEXTS[int(vyber) - 1]
-    vycistena_slova = list()
-    pocet_slov = 0
-    zacinajicí_velkym = 0
-    velkymi_pismeny = 0
-    malymi_pismeny = 0
-    pocet_cisel = 0
-    soucet_cisel = 0
+	text = TEXTS[int(vyber) - 1]
+	vycistena_slova = list()
+	pocet_slov = 0
+	zacinajici_velkym = 0
+	velkymi_pismeny = 0
+	malymi_pismeny = 0
+	pocet_cisel = 0
+	soucet_cisel = 0
+	vyskyt_delky = dict()
 
-    for slovo in text.split():
-        vycistena_slova.append(
-            slovo.strip(",.:;")
-        )
-        pocet_slov += 1
+	for slovo in text.split():
+		vycistena_slova.append(
+			slovo.strip(",.:;")
+		)
+		pocet_slov += 1
 
+		if slovo.isalpha() and slovo.isupper():
+			velkymi_pismeny += 1
 
-        if slovo.isalpha() and slovo.isupper():
-            velkymi_pismeny += 1
+		if slovo[0].isupper():
+			zacinajici_velkym += 1
 
-        if slovo[0].isupper():
-            zacinajicí_velkym += 1
+		elif slovo.islower():
+			malymi_pismeny += 1
 
-        elif slovo.islower():
-            malymi_pismeny += 1
-
-        elif slovo.isnumeric():
-            pocet_cisel += 1
-            soucet_cisel += int(slovo)
+		elif slovo.isnumeric():
+			pocet_cisel += 1
+			soucet_cisel += int(slovo)
 
 else:
-    print("Incorrect input, terminating the program...")
-    quit()
+	print("Incorrect input, terminating the program...")
+	quit()
 
-print(f"There are {pocet_slov} words in the selected text.")
-print(f"There are {zacinajicí_velkym} titlecase words.")
-print(f"There are {velkymi_pismeny} uppercase words.")
-print(f"There are {malymi_pismeny} lowercase words.")
-print(f"There are {pocet_cisel} numeric strings.")
-print(f"The sum of all the numbers is {soucet_cisel}.")
+# POCET PISMEN
+for i in vycistena_slova:
+	for pocet_pismen in i:
+		delka = len(i)
+		if delka not in vyskyt_delky:
+			vyskyt_delky[delka] = 1
+			break
+		else:
+			vyskyt_delky[delka] += 1
+			break
 
-# TO DO:
-# sloupcový graf
+print(f"""There are {pocet_slov} words in the selected text.
+There are {zacinajici_velkym} titlecase words.
+There are {velkymi_pismeny} uppercase words.
+There are {malymi_pismeny} lowercase words.
+There are {pocet_cisel} numeric strings."
+The sum of all the numbers is {soucet_cisel}.
+{oddelovac}
+LEN|   OCCURENCES    |NR.
+{oddelovac}""")
+
+vysledky = list()
+for vyskyt in vyskyt_delky:
+	vysledky.append((vyskyt_delky[vyskyt], vyskyt))
+
+setridene_vysledky = sorted(vysledky, key=lambda x: x[1])
+
+for tupl in setridene_vysledky:
+	graf = tupl[0]*"*"
+	print(f"{tupl[1]:>3}|{graf:<17}|{tupl[0]}")
